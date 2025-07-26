@@ -1,5 +1,11 @@
 [myconfig]
 type = s3
 provider = AWS
-acl = private
+env_auth = false
+access_key_id = 
+secret_access_key = 
+region = us-east-1
+endpoint = s3.amazonaws.com
 bucket = mirrulations
+no_check_bucket = true
+public_access_block = false
