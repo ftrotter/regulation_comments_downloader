@@ -63,7 +63,7 @@ def main():
     print("=" * 80)
     print("MIRRULATIONS DOWNLOADER - COMPREHENSIVE TEST SUITE")
     print("=" * 80)
-    print("This test suite will validate the mirrulations_downloader.py script")
+    print("This test suite will validate the mirrulations_bulk_downloader.py script")
     print("by testing different download patterns and validating results.")
     print()
     print("Tests to run:")
@@ -81,7 +81,7 @@ def main():
     print("\nChecking prerequisites...")
     
     # Check if main script exists
-    main_script = project_root / "mirrulations_downloader.py"
+    main_script = project_root / "mirrulations_bulk_downloader.py"
     if not main_script.exists():
         print(f"ERROR: Main script not found: {main_script}")
         return False

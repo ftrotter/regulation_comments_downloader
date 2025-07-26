@@ -1,9 +1,9 @@
 Folder Structure Fix
 ==================
 
-The current code in mirrulations_downloader.py is based on an old directory structure for the mirrulations project.
+The current code in mirrulations_bulk_downloader.py is based on an old directory structure for the mirrulations project.
 
-Please help me re-write the mirrulations_downloader.py script to support the same arguments and features.
+Please help me re-write the mirrulations_bulk_downloader.py script to support the same arguments and features.
 But to honor the new directory structure.
 
 The other big change is that the mirrulatins project is no longer "requestor pays", so support for this functionality can be removed.

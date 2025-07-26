@@ -1,6 +1,6 @@
 # Mirrulations Downloader Test Suite
 
-This directory contains comprehensive tests for the mirrulations_downloader.py script. The tests validate different download patterns and ensure the script works correctly with the new folder structure.
+This directory contains comprehensive tests for the mirrulations_bulk_downloader.py script. The tests validate different download patterns and ensure the script works correctly with the new folder structure.
 
 ## Test Scripts
 

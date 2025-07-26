@@ -33,14 +33,14 @@ def run_download_test():
     env['RCLONE_CONFIG_FILE'] = './rclone.conf.example'
     
     print(f"Test data will be downloaded to: {test_data_dir}")
-    print("Running command: python mirrulations_downloader.py --docket CMS-2025-0050")
+    print("Running command: python mirrulations_bulk_downloader.py --docket CMS-2025-0050")
     
     start_time = time.time()
     
     # Run the download command
     try:
         result = subprocess.run([
-            "python", "mirrulations_downloader.py", 
+            "python", "mirrulations_bulk_downloader.py",
             "--docket", "CMS-2025-0050",
             "--noconfirm"
         ], 

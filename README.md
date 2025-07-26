@@ -11,7 +11,7 @@ copy rclone.conf.example and modify it to suit your needs
 
 
 ```bash
-python mirrulations_downloader.py
+python mirrulations_bulk_downloader.py
 ```
 
 And it should guide you through your download options.
