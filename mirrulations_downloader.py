@@ -18,13 +18,13 @@ def parse_years(year_str):
     return years
 
 
-def print_and_run_command_array(command_array):
+def print_and_run_command_array(command_array, noconfirm=False):
 
     print("Preparing to run:")
     for this_command in command_array:
         print(f"\t{this_command}")
 
-    if click.confirm('Do you want to run these commands?', default=False):
+    if noconfirm or click.confirm('Do you want to run these commands?', default=False):
         for this_command in command_array:
             print(f"Running:\t{this_command}")
             os.system(this_command)
@@ -86,8 +86,9 @@ def generate_include_patterns(agency_list, year_list, docket_list, included_file
 @click.option('--getall', is_flag=True, help="Download all agencies, all years. (WARNING: this could cost a few hundred dollars...)")
 @click.option('--transfers', default='', help="How many rclone connections to run at the same time (default is 50)")
 @click.option('--docket','-d', default='', help="Download a specific docket id")
+@click.option('--noconfirm', is_flag=True, help="Skip confirmation prompt and run commands automatically")
 
-def main(agency, year, docket, textonly, getall, transfers ):
+def main(agency, year, docket, textonly, getall, transfers, noconfirm):
     agency_list = [agency.strip() for agency in agency.split(',') if agency.strip()]
     docket_list =  [docket.strip() for docket in docket.split(',') if docket.strip()]
     
@@ -96,9 +97,9 @@ def main(agency, year, docket, textonly, getall, transfers ):
     else:
         year_list = []
 
-    run_command(agency_list, year_list, docket_list, textonly, getall, transfers)
+    run_command(agency_list, year_list, docket_list, textonly, getall, transfers, noconfirm)
 
-def run_command(agency_list, year_list, docket_list, textonly, getall, transfers):
+def run_command(agency_list, year_list, docket_list, textonly, getall, transfers, noconfirm):
     """A command to generate and run the rclone commands needed to download regulations data from the mirrulations project!"""
 
     start_time = time.time()
@@ -178,8 +179,8 @@ def run_command(agency_list, year_list, docket_list, textonly, getall, transfers
         exit()
 
     #If we get here then we have the files we need to proceed.
-    #Updated base path to work with new structure (removed mirrulations/ subdirectory)
-    base_rclone_command = f"rclone copy myconfig: {dest_dir} --config {rclone_config_file} {always_flags}"
+    #Updated base path to work with new structure
+    base_rclone_command = f"rclone copy myconfig:mirrulations/ {dest_dir} --config {rclone_config_file} {always_flags}"
 
     if getall:
         if is_limited:
@@ -189,7 +190,7 @@ def run_command(agency_list, year_list, docket_list, textonly, getall, transfers
             #If we get here, then should simply download everything.
             #we just run the command with no modification with --include statements
             commands_to_run = [ base_rclone_command ]
-            print_and_run_command_array(commands_to_run)
+            print_and_run_command_array(commands_to_run, noconfirm)
     else:
         #Here we are downloading some subset of the data.. which we will express with one or more --include statements to the rclone command
         include_patterns = generate_include_patterns(agency_list, year_list, docket_list, included_file_types)
@@ -199,7 +200,7 @@ def run_command(agency_list, year_list, docket_list, textonly, getall, transfers
             this_command += f" --include \"{include_pattern}\" "
 
         command_array = [ this_command ]
-        print_and_run_command_array(command_array)
+        print_and_run_command_array(command_array, noconfirm)
 
     #No matter if we are downloading a portion or everything..
     #We print out how long it took to run.

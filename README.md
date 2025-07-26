@@ -27,6 +27,6 @@ Options:
   --transfers TEXT   How many rclone connections to run at the same time
                      (default is 50)
   -d, --docket TEXT  Download a specific docket id
+  --noconfirm        Skip confirmation prompt and run commands automatically
   --help             Show this message and exit
 ```
-
