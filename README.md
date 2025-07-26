@@ -4,6 +4,12 @@ A python script to download regulations data from mirrulations
 
 Relies on having [rclone](https://rclone.org/) installed.
 
+## Setup
+copy example.env to .env and fill in the details about where to save your mirrulations data.
+copy rclone.conf.example and modify it to suit your needs
+
+
+
 ```bash
 python mirrulations_downloader.py
 ```
@@ -23,3 +29,4 @@ Options:
   -d, --docket TEXT  Download a specific docket id
   --help             Show this message and exit
 ```
+
